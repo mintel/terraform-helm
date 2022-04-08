@@ -48,6 +48,7 @@ syncWorkspace:
   # on the pod.
   exposeMetricsPort: false
 
+  # Configure a Prometheus Pod Monitor
   podMonitor:
     # enabled is a boolean that denotes whether to create the pod monitor or not.
     # Requires exposeMetricsPorts to be true
@@ -67,6 +68,10 @@ syncWorkspace:
 
     # the scheme for prometheus scrapes
     scheme: http
+
+  # Overwrite Pod Security Context
+  podSecurityContext:
+    runAsUser: 65535
 
   # WARNING: logLevel not supported by terraform-k8s:1.0.0 version, or earlier.
   # Uncomment to configure log verbosity level. One of "debug", "info", or "error".
