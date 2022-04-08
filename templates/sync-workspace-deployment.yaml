@@ -31,6 +31,12 @@ spec:
         - name: terraform-sync-workspace
           image: "{{ default .Values.global.imageK8S .Values.syncWorkspace.image }}"
           imagePullPolicy: "{{ default "IfNotPresent" .Values.syncWorkspace.imagePullPolicy }}"
+          { { - if .Values.syncWorkspace.enableMetrics } }
+            ports:
+              - containerPort: 8383
+                protocol: TCP
+                name: metrics
+          { { - end } }
           env:
             - name: POD_NAME
               valueFrom:

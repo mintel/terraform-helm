@@ -1,0 +1,35 @@
+{{- $syncEnabled := (or (and (ne (.Values.syncWorkspace.enabled | toString) "-") .Values.syncWorkspace.enabled) (and (eq (.Values.syncWorkspace.enabled | toString) "-") .Values.global.enabled)) }}
+{{- if (and $syncEnabled .Values.syncWorkspace.podMonitor.enabled) }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ template "terraform.fullname" . }}-sync-workspace
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: { { template "terraform.name" . } }
+    chart: { { template "terraform.chart" . } }
+    heritage: { { .Release.Service } }
+    release: { { .Release.Name } }
+spec:
+  podMetricsEndpoints:
+    - port: {{ .Values.podMonitor.port | default "metrics" }}
+      path: {{ .Values.podMonitor.path | default "/metrics" }}
+      {{- if .Values.podMonitor.interval }}
+      interval: {{ .Values.podMonitor.interval }}
+      {{- end }}
+      {{- if .Values.podMonitor.scrapeTimeout }}
+      scrapeTimeout: {{ .Values.podMonitor.scrapeTimeout }}
+      {{- end }}
+      {{- if .Values.podMonitor.scheme }}
+      scheme: {{ .Values.podMonitor.scheme }}
+      {{- end }}
+  jobLabel: {{ template "terraform.fullname" . }}-sync-workspace
+  namespaceSelector:
+    matchNames:
+      {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      app: { { template "terraform.name" . } }
+      chart: { { template "terraform.chart" . } }
+      heritage: { { .Release.Service } }
+      release: { { .Release.Name } }
