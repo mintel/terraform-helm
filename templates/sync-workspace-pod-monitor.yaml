@@ -33,3 +33,4 @@ spec:
       chart: { { template "terraform.chart" . } }
       heritage: { { .Release.Service } }
       release: { { .Release.Name } }
+{{- end }}
