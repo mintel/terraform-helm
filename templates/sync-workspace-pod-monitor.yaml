@@ -28,7 +28,7 @@ spec:
   jobLabel: {{ template "terraform.fullname" . }}-sync-workspace
   namespaceSelector:
     matchNames:
-      {{ .Release.Namespace }}
+      - {{ .Release.Namespace }}
   selector:
     matchLabels:
       app: {{ template "terraform.name" . }}

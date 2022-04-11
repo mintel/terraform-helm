@@ -2,10 +2,10 @@ apiVersion: v1
 entries:
   mintel-terraform:
   - apiVersion: v1
-    created: "2022-04-11T13:38:12.789122957+01:00"
+    created: "2022-04-11T13:44:14.558902986+01:00"
     description: Install and configure Terraform Cloud Operator on Kubernetes with
       some changes.
-    digest: 74708e8f1030f51701b52c4d194bee761bcd78c799c8e7a954d8609dce336087
+    digest: 9385e1618f69c14f0a69caae7442bb718e58914f19bfdbfb7a1e195b0a821dc9
     home: https://www.terraform.io
     name: mintel-terraform
     sources:
@@ -15,4 +15,4 @@ entries:
     urls:
     - https://mintel.github.io/terraform-helm/mintel-terraform-0.0.5.tgz
     version: 0.0.5
-generated: "2022-04-11T13:38:12.785037948+01:00"
+generated: "2022-04-11T13:44:14.555103161+01:00"
