@@ -6,10 +6,10 @@ metadata:
   name: {{ template "terraform.fullname" . }}-sync-workspace
   namespace: {{ .Release.Namespace }}
   labels:
-    app: { { template "terraform.name" . } }
-    chart: { { template "terraform.chart" . } }
-    heritage: { { .Release.Service } }
-    release: { { .Release.Name } }
+    app: {{ template "terraform.name" . }}
+    chart: {{ template "terraform.chart" . }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
 spec:
   podMetricsEndpoints:
     {{- with .Values.syncWorkspace.podMonitor }}
@@ -31,8 +31,8 @@ spec:
       {{ .Release.Namespace }}
   selector:
     matchLabels:
-      app: { { template "terraform.name" . } }
-      chart: { { template "terraform.chart" . } }
-      heritage: { { .Release.Service } }
-      release: { { .Release.Name } }
+      app: {{ template "terraform.name" . }}
+      chart: {{ template "terraform.chart" . }}
+      heritage: {{ .Release.Service }}
+      release: {{ .Release.Name }}
 {{- end }}
