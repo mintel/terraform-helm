@@ -68,9 +68,11 @@ spec:
           - name: terraformrc
             mountPath: "/etc/terraform"
             readOnly: true
+          {{- if .Values.syncWorkspace.sensitiveVariables.enabled }}
           - name: sensitivevars
             mountPath: "/tmp/secrets"
             readOnly: true
+          {{- end }}
           command:
             - /bin/terraform-k8s
           args:
