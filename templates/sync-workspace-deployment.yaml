@@ -27,9 +27,9 @@ spec:
         component: sync-workspace
     spec:
       serviceAccountName: {{ template "terraform.fullname" . }}-sync-workspace
-#      {{- with .Values.syncWorkspace.podSecurityContext }}
-#      securityContext: { { toYaml . | nindent 8 } }
-#      { { - end } }
+      {{- with .Values.syncWorkspace.podSecurityContext }}
+      securityContext: {{ toYaml . | nindent 8 }}
+      {{- end }}
       containers:
         - name: terraform-sync-workspace
           image: "{{ default .Values.global.imageK8S .Values.syncWorkspace.image }}"
