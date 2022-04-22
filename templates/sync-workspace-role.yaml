@@ -45,7 +45,6 @@ rules:
   - monitoring.coreos.com
   resources:
   - servicemonitors
-  - podmonitors
   verbs:
   - get
   - create
@@ -76,12 +75,4 @@ rules:
   - workspaces
   verbs:
   - '*'
-- apiGroups:
-    - coordination.k8s.io
-  resources:
-    - leases
-  verbs:
-    - get
-    - update
-    - create
 {{- end }}
