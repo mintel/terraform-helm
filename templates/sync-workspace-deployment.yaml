@@ -116,9 +116,7 @@ spec:
             items:
             - key: {{ required "secret key for terraformrc file required" .Values.syncWorkspace.terraformRC.secretKey }}
               path: ".terraformrc"
-        {{- if .Values.syncWorkspace.sensitiveVariables.enabled }}
         - name: sensitivevars
           secret:
             secretName: {{ required "secret name for sensitive workspace variables required" .Values.syncWorkspace.sensitiveVariables.secretName }}
-        {{- end }}
   {{- end }}

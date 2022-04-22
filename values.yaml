@@ -86,7 +86,6 @@ syncWorkspace:
 
   # Name of Kubernetes secret containing keys and values of sensitive variables 
   sensitiveVariables:
-    enabled: true
     secretName: workspacesecrets
 
 # Control whether a test Pod manifest is generated when running helm template.
