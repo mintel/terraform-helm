@@ -2,7 +2,7 @@
 {{- if $syncEnabled }}
 apiVersion: rbac.authorization.k8s.io/v1
 {{- $kind := (ternary "ClusterRole" "Role" (or (empty .Values.syncWorkspace.k8WatchNamespace) (eq (.Values.syncWorkspace.k8WatchNamespace | toString) .Release.Namespace))) }}
-kind: {{ ternary "ClusterRoleBinding" "RoleBinding" (eq $kind "Role") }}
+kind: {{ ternary "RoleBinding" "ClusterRoleBinding" (eq $kind "Role") }}
 metadata:
   name: {{ template "terraform.fullname" . }}-sync-workspace
   labels:
