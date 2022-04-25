@@ -30,10 +30,10 @@ syncWorkspace:
   # self-signed certificates
   insecure: false
 
-  # k8WatchNamespace is the Kubernetes namespace to watch for workspace
-  # changes and sync to Terraform Cloud. If this is not set then it will default
-  # to the release namespace
-  k8WatchNamespace: null
+#  # k8WatchNamespace is the Kubernetes namespace to watch for workspace
+#  # changes and sync to Terraform Cloud. If this is not set then it will default
+#  # to the release namespace
+#  k8WatchNamespace: null
 
   # terraformVersion describes the version of Terraform to use for each workspace.
   # If this is not set then it will default to the latest version of Terraform
