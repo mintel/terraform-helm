@@ -74,7 +74,9 @@ spec:
           command:
             - /bin/terraform-k8s
           args:
+            { { - if not .Values.syncWorkspace.watchAllNamespaces } }
             - --k8s-watch-namespace={{ default .Release.Namespace .Values.syncWorkspace.k8WatchNamespace}}
+            { { - end } }
             {{- if .Values.syncWorkspace.logLevel }}
             - --zap-log-level={{ .Values.syncWorkspace.logLevel }}
             {{- end }}

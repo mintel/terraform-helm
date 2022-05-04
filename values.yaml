@@ -30,6 +30,10 @@ syncWorkspace:
   # self-signed certificates
   insecure: false
 
+  # If true watchAllNamespaces will configure the operator to watch for workspace
+  # changes across all kubernetes namespaces.
+  watchAllNamespaces: false
+
   # k8WatchNamespace is the Kubernetes namespace to watch for workspace
   # changes and sync to Terraform Cloud. If this is not set then it will default
   # to the release namespace
