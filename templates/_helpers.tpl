@@ -63,7 +63,7 @@ Inject extra environment vars in the format key:value, if populated
 Define the kind of Role to use
 */}}
 {{- define "terraform.getRole" -}}
-  {{- if or .Values.syncWorkspace.watchAllNamespaces (or (empty .Values.syncWorkspace.k8WatchNamespace) (eq (.Values.syncWorkspace.k8WatchNamespace | toString) .Release.Namespace)) }}
+  {{- if or .Values.syncWorkspace.watchAllNamespaces (or (empty .Values.syncWorkspace.k8WatchNamespace)) }}
     {{- "ClusterRole" }}
   {{- else }}
     {{- "Role" }}
