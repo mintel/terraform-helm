@@ -77,6 +77,15 @@ syncWorkspace:
   podSecurityContext:
     runAsUser: 65535
 
+  # Overwrite pod/container resource limit and requests
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "500m"
+    limits:
+      memory: "256Mi"
+      cpu: "1000m"
+
   # WARNING: logLevel not supported by terraform-k8s:1.0.0 version, or earlier.
   # Uncomment to configure log verbosity level. One of "debug", "info", or "error".
   # Defaults to "debug".

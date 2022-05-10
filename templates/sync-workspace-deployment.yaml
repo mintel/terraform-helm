@@ -34,6 +34,9 @@ spec:
         - name: terraform-sync-workspace
           image: "{{ default .Values.global.imageK8S .Values.syncWorkspace.image }}"
           imagePullPolicy: "{{ default "IfNotPresent" .Values.syncWorkspace.imagePullPolicy }}"
+          {{- with .Values.syncWorkspace.resources }}
+          resources: {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- if .Values.syncWorkspace.exposeMetricsPort }}
           ports:
             - containerPort: 8383
