@@ -44,6 +44,7 @@ rules:
   - monitoring.coreos.com
   resources:
   - servicemonitors
+  - podmonitors
   verbs:
   - get
   - create

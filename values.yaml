@@ -65,10 +65,10 @@ syncWorkspace:
     path: /metrics
 
     # time between Prometheus metric scrapes.
-    interval: 5s
+    interval: 30s
 
     # maximum amount of time for Prometheus to try to scrape metrics before timing out.
-    scrapeTimeout: 30s
+    scrapeTimeout: 10s
 
     # the scheme for prometheus scrapes
     scheme: http
