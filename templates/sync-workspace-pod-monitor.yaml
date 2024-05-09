@@ -1,38 +1,38 @@
-{{- $syncEnabled := (or (and (ne (.Values.syncWorkspace.enabled | toString) "-") .Values.syncWorkspace.enabled) (and (eq (.Values.syncWorkspace.enabled | toString) "-") .Values.global.enabled)) }}	
-{{- if (and $syncEnabled .Values.syncWorkspace.podMonitor.enabled) }}	
-apiVersion: monitoring.coreos.com/v1	
-kind: PodMonitor	
-metadata:	
-  name: {{ template "terraform.fullname" . }}-sync-workspace	
-  namespace: {{ .Release.Namespace }}	
-  labels:	
-    app: {{ template "terraform.name" . }}	
-    chart: {{ template "terraform.chart" . }}	
-    heritage: {{ .Release.Service }}	
-    release: {{ .Release.Name }}	
-spec:	
-  podMetricsEndpoints:	
-    {{- with .Values.syncWorkspace.podMonitor }}	
-    - port: {{ .port | default "metrics" }}	
-      path: {{ .path | default "/metrics" }}	
-      {{- if .interval }}	
-      interval: {{ .interval }}	
-      {{- end }}	
-      {{- if .scrapeTimeout }}	
-      scrapeTimeout: {{ .scrapeTimeout }}	
-      {{- end }}	
-      {{- if .scheme }}	
-      scheme: {{ .scheme }}	
-      {{- end }}	
-    {{- end }}	
-  jobLabel: {{ template "terraform.fullname" . }}-sync-workspace	
-  namespaceSelector:	
-    matchNames:	
-      - {{ .Release.Namespace }}	
-  selector:	
-    matchLabels:	
-      app: {{ template "terraform.name" . }}	
-      chart: {{ template "terraform.chart" . }}	
-      heritage: {{ .Release.Service }}	
-      release: {{ .Release.Name }}	
-{{- end }}	
+{{- $syncEnabled := (or (and (ne (.Values.syncWorkspace.enabled | toString) "-") .Values.syncWorkspace.enabled) (and (eq (.Values.syncWorkspace.enabled | toString) "-") .Values.global.enabled)) }}
+{{- if (and $syncEnabled .Values.syncWorkspace.podMonitor.enabled) }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ template "terraform.fullname" . }}-sync-workspace
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "terraform.name" . }}
+    chart: {{ template "terraform.chart" . }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+spec:
+  podMetricsEndpoints:
+    {{- with .Values.syncWorkspace.podMonitor }}
+    - port: {{ .port | default "metrics" }}
+      path: {{ .path | default "/metrics" }}
+      {{- if .interval }}
+      interval: {{ .interval }}
+      {{- end }}
+      {{- if .scrapeTimeout }}
+      scrapeTimeout: {{ .scrapeTimeout }}
+      {{- end }}
+      {{- if .scheme }}
+      scheme: {{ .scheme }}
+      {{- end }}
+    {{- end }}
+  jobLabel: {{ template "terraform.fullname" . }}-sync-workspace
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
+  selector:
+    matchLabels:
+      app: {{ template "terraform.name" . }}
+      chart: {{ template "terraform.chart" . }}
+      heritage: {{ .Release.Service }}
+      release: {{ .Release.Name }}
+{{- end }}
