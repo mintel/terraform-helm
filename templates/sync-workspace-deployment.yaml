@@ -42,7 +42,7 @@ spec:
             - containerPort: 8383
               protocol: TCP
               name: metrics
-          {{- end }}            
+          {{- end }}
           env:
             - name: POD_NAME
               valueFrom:
@@ -57,7 +57,7 @@ spec:
             {{- if .Values.syncWorkspace.insecure }}
             - name: TF_INSECURE
               value: "{{ .Values.syncWorkspace.insecure }}"
-            {{- end}}
+            {{- end }}
             - name: TF_CLI_CONFIG_FILE
               value: "/etc/terraform/.terraformrc"
             - name: TF_URL
