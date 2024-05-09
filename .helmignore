@@ -1,6 +1,0 @@
-.circleci/*
-.github/*
-.git/*
-docs/*
-test/*
-example/*

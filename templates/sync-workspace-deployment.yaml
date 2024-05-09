@@ -27,22 +27,10 @@ spec:
         component: sync-workspace
     spec:
       serviceAccountName: {{ template "terraform.fullname" . }}-sync-workspace
-      {{- with .Values.syncWorkspace.podSecurityContext }}
-      securityContext: {{ toYaml . | nindent 8 }}
-      {{- end }}
       containers:
         - name: terraform-sync-workspace
           image: "{{ default .Values.global.imageK8S .Values.syncWorkspace.image }}"
           imagePullPolicy: "{{ default "IfNotPresent" .Values.syncWorkspace.imagePullPolicy }}"
-          {{- with .Values.syncWorkspace.resources }}
-          resources: {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- if .Values.syncWorkspace.exposeMetricsPort }}
-          ports:
-            - containerPort: 8383
-              protocol: TCP
-              name: metrics
-          {{- end }}
           env:
             - name: POD_NAME
               valueFrom:
@@ -57,7 +45,7 @@ spec:
             {{- if .Values.syncWorkspace.insecure }}
             - name: TF_INSECURE
               value: "{{ .Values.syncWorkspace.insecure }}"
-            {{- end }}
+            {{- end}}
             - name: TF_CLI_CONFIG_FILE
               value: "/etc/terraform/.terraformrc"
             - name: TF_URL
@@ -77,9 +65,8 @@ spec:
           command:
             - /bin/terraform-k8s
           args:
-            {{- if not .Values.syncWorkspace.watchAllNamespaces }}
+            - --enable-leader-election
             - --k8s-watch-namespace={{ default .Release.Namespace .Values.syncWorkspace.k8WatchNamespace}}
-            {{- end }}
             {{- if .Values.syncWorkspace.logLevel }}
             - --zap-log-level={{ .Values.syncWorkspace.logLevel }}
             {{- end }}
@@ -121,4 +108,4 @@ spec:
         - name: sensitivevars
           secret:
             secretName: {{ required "secret name for sensitive workspace variables required" .Values.syncWorkspace.sensitiveVariables.secretName }}
-  {{- end }}
+{{- end }}
