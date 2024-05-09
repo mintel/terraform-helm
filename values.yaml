@@ -44,6 +44,44 @@ syncWorkspace:
   # to Terraform Cloud (https://app.terraform.io)
   tfeAddress: null
 
+  # exposeMetricsPort is a boolean that denotes whether to expose the metrics port
+  # on the pod.
+  exposeMetricsPort: false
+
+  # Configure a Prometheus Pod Monitor
+  podMonitor:
+    # enabled is a boolean that denotes whether to create the pod monitor or not.
+    # Requires exposeMetricsPorts to be true
+    enabled: false
+
+    # port to scrape for metrics.
+    port: metrics
+
+    # path to scrape for metrics
+    path: /metrics
+
+    # time between Prometheus metric scrapes.
+    interval: 30s
+
+    # maximum amount of time for Prometheus to try to scrape metrics before timing out.
+    scrapeTimeout: 10s
+
+    # the scheme for prometheus scrapes
+    scheme: http
+
+  # Overwrite Pod Security Context
+  podSecurityContext:
+    runAsUser: 65535
+
+  # Overwrite pod/container resource limit and requests
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "500m"
+    limits:
+      memory: "256Mi"
+      cpu: "1000m"
+
   # WARNING: logLevel not supported by terraform-k8s:1.0.0 version, or earlier.
   # Uncomment to configure log verbosity level. One of "debug", "info", or "error".
   # Defaults to "debug".
