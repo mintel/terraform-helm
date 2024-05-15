@@ -11,7 +11,7 @@ global:
   # imageK8S is the name (and tag) of the terraform-k8s Docker image that
   # is used for functionality such as workspace sync. This can be overridden
   # per component.
-  imageK8S: "hashicorp/terraform-k8s:1.1.0"
+  imageK8S: "hashicorp/terraform-k8s:1.1.2"
 
 # syncWorkspace will run the workspace sync process to sync K8S Workspaces with
 # Terraform Cloud workspaces.
@@ -29,10 +29,6 @@ syncWorkspace:
   # the operator has to do. It can be used when connecting to TFE instances with
   # self-signed certificates
   insecure: false
-
-  # If true watchAllNamespaces will configure the operator to watch for workspace
-  # changes across all kubernetes namespaces.
-  watchAllNamespaces: false
 
   # k8WatchNamespace is the Kubernetes namespace to watch for workspace
   # changes and sync to Terraform Cloud. If this is not set then it will default
